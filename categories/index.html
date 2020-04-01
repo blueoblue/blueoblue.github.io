@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,20 +79,16 @@
 
 
 
-<meta name="description" content="hexo博客系统搭建        需安装node.js、git，并添加环境变量。若git官网下载过慢或打不开可前往淘宝镜像源：https:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;git-for-windows&#x2F; 来下载。 关于环境变量管理方式见文末。 一、安装 新建一个空目录：blog，并切换至该目录下。   首先安装hexo模块 1blog &gt;&gt;&amp;gt">
 <meta property="og:type" content="website">
-<meta property="og:title" content="hexo配置">
-<meta property="og:url" content="http://blueoblue.github.io/hexo/00install.html">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://blueoblue.github.io/categories/index.html">
 <meta property="og:site_name" content="Blueoblue&#39;s blog">
-<meta property="og:description" content="hexo博客系统搭建        需安装node.js、git，并添加环境变量。若git官网下载过慢或打不开可前往淘宝镜像源：https:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;git-for-windows&#x2F; 来下载。 关于环境变量管理方式见文末。 一、安装 新建一个空目录：blog，并切换至该目录下。   首先安装hexo模块 1blog &gt;&gt;&amp;gt">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:%5CUsers&&%5CPictures%5CScreenShot%5Cec.jpg">
-<meta property="article:published_time" content="2020-03-31T07:10:02.000Z">
-<meta property="article:modified_time" content="2020-03-31T07:15:03.466Z">
+<meta property="article:published_time" content="2020-04-01T13:19:06.000Z">
+<meta property="article:modified_time" content="2020-04-01T14:39:51.052Z">
 <meta property="article:author" content="blue">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers&&%5CPictures%5CScreenShot%5Cec.jpg">
 
 
 
@@ -100,9 +96,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -122,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://blueoblue.github.io/hexo/00install.html"/>
+  <link rel="canonical" href="http://blueoblue.github.io/categories/"/>
 
 
 
 
 
-  <title>hexo配置 | Blueoblue's blog</title>
+  <title>categories | Blueoblue's blog</title>
   
 
 
@@ -147,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -193,6 +189,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/%20" rel="section">
             
@@ -228,7 +244,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">hexo配置</h1>
+	<h1 class="post-title" itemprop="name headline">categories</h1>
 
 
 
@@ -240,56 +256,14 @@
       <div class="post-body">
         
         
-          <h1>
-    <center>
-    hexo博客系统搭建
-    </center>
-</h1>
-
-<p>需安装node.js、git，并添加环境变量。若git官网下载过慢或打不开可前往淘宝镜像源：<a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a> 来下载。</p>
-<p>关于环境变量管理方式见文末。</p>
-<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><ol start="0">
-<li>新建一个空目录：blog，并切换至该目录下。</li>
-</ol>
-<ol>
-<li><p>首先安装hexo模块</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog &gt;&gt;&gt; npm install <span class="literal">-g</span> hexo</span><br></pre></td></tr></table></figure>
-
-<p>其中npm安装模式分为：</p>
-<blockquote>
-<p>全局安装：<code>npm install **-g** module</code></p>
-<p>即添加 <strong>-g</strong> 选项。</p>
-</blockquote>
-<blockquote>
-<p>局部安装：<code>npm install module</code></p>
-<p>即不添加 <strong>-g</strong> 选项。</p>
-</blockquote>
-</li>
-<li><p>新建网站</p>
-<p>需将hexo-cli模块的可执行文件加入环境变量中：C:\Users\pc-username\AppData\Roaming\npm\node_modules\hexo-cli\bin</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog &gt;&gt;&gt; hexo init folder</span><br></pre></td></tr></table></figure>
-
-<p>若未指定 目录<strong>folder</strong> ，则默认在当卡目录下初始化网站。</p>
-</li>
-<li><p>安装依赖、文件部署</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blog &gt;&gt;&gt; cd folder</span><br><span class="line">blog\folder &gt;&gt;&gt; npm install</span><br><span class="line">...</span><br><span class="line">blog\folder &gt;&gt;&gt; hexo generate</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动服务</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blog\folder &gt;&gt;&gt; hexo server</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>浏览器中键入：”localhost:4000”。</p>
-</li>
-</ol>
-<h1 id="二、github仓库设置"><a href="#二、github仓库设置" class="headerlink" title="二、github仓库设置"></a>二、github仓库设置</h1><p>创建新仓库：github-username.github.io</p>
-<p>点击该仓库最右侧：setting，找到 <strong>GitHub Pages</strong> 选项&gt;</p>
-<p>选择网页主题样式。</p>
-<p>完成后，搭建完成。</p>
-<h1 id="三、环境变量管理器"><a href="#三、环境变量管理器" class="headerlink" title="三、环境变量管理器"></a>三、环境变量管理器</h1><p>配置开发环境时，经常需要添加相应环境变量。但设置比较复杂，所以推荐一款管理器，来轻松管理环境变量。</p>
-<p><strong>Rapid Environment Editor</strong> ,软件支持中文，并且免费。无广告。</p>
-<p><img src="C:%5CUsers&&%5CPictures%5CScreenShot%5Cec.jpg" alt="envir"></p>
-<p>分为左侧系统变量，右侧用户变量。修改变量是，需点击变量左侧小“<strong>+</strong>”展开后，在修改。而修改系统变量时，需点击中间分割线上方的“以管理员身份启动”。修改完后，点击保存。</p>
-<p>若要使环境变量生效，不必重启系统。只需在“<strong>任务管理器</strong>”中 <strong>重启</strong> “<strong>Windows资源管理器</strong>” （即文件管理器），新设环境变量便能生效。</p>
-
+          <div class="category-all-page">
+            <div class="category-all-title">
+                目前共计 2 个分类
+            </div>
+            <div class="category-all">
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/win/">win</a><span class="category-list-count">1</span></li></ul>
+            </div>
+          </div>
         
       </div>
       
@@ -331,17 +305,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -363,15 +328,24 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">2</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -392,26 +366,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">
-    
-    hexo博客系统搭建
-    
-</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装"><span class="nav-number">1.1.</span> <span class="nav-text">一、安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、github仓库设置"><span class="nav-number">2.</span> <span class="nav-text">二、github仓库设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、环境变量管理器"><span class="nav-number">3.</span> <span class="nav-text">三、环境变量管理器</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -444,7 +398,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -545,6 +499,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
