@@ -86,16 +86,15 @@
 <meta property="og:site_name" content="Blueo&#39;s blog">
 <meta property="og:description" content="Led点阵工作原理led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。 点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I&#x2F;O资源。也降低">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:/APPJIDI/Git/gitter/Note/C51/imgs/led_matrix.jpg">
+<meta property="og:image" content="https://githubusercontent.com/blueoblue/Pics/master/imgs/C51/2020/20200411220330led_matrix.jpg">
 <meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png">
-<meta property="og:image" content="c:%5CUsers&&%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200409153256590.png">
 <meta property="og:image" content="c:%5CUsers&&%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200410165654213.png">
 <meta property="article:published_time" content="2020-04-10T10:12:44.000Z">
-<meta property="article:modified_time" content="2020-04-10T10:17:26.644Z">
+<meta property="article:modified_time" content="2020-04-11T14:11:02.835Z">
 <meta property="article:author" content="blue">
 <meta property="article:tag" content="C51">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/APPJIDI/Git/gitter/Note/C51/imgs/led_matrix.jpg">
+<meta name="twitter:image" content="https://githubusercontent.com/blueoblue/Pics/master/imgs/C51/2020/20200411220330led_matrix.jpg">
 
 
 
@@ -189,7 +188,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -198,18 +197,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -219,7 +208,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/%20" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -229,7 +218,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -360,9 +349,8 @@
 
       
         <h2 id="Led点阵工作原理"><a href="#Led点阵工作原理" class="headerlink" title="Led点阵工作原理"></a>Led点阵工作原理</h2><p>led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。</p>
-<p>点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I/O资源。也降低了整列的控制难度。同8个单独LED一样，点阵也分为共阴极、共阳极。通常所说的点阵共阴极（阳极）是指 <strong>按行</strong> 来看二极管的排布方式。如下是一个共阳极的点阵。</p>
-<img src="D:\APPJIDI\Git\gitter\Note\C51\imgs\led_matrix.jpg" alt="led_matrix" style="zoom: 80%;" />
-
+<p>点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I/O资源。也降低了整列的控制难度。同8个单独LED一样，点阵也分为共阴极、共阳极。通常所说的点阵共阴极（阳极）是指 <strong>按行</strong> 来看二极管的排布方上传图片失败。如下是一个共阳极的点阵。</p>
+<p><img src="https://githubusercontent.com/blueoblue/Pics/master/imgs/C51/2020/20200411220330led_matrix.jpg" alt="led_matrix"></p>
 <h6><center>8x8led共阳极点阵</center></h6>
 
 <p>其中，下侧的控制端 P7为高位，P0为低位；右侧DPh为高位，DPa为低位。要让<strong>左下RE57</strong>点亮，需要将 <strong>右侧DPa口置为高电平，DPh~DPb为低电平</strong>，下侧P07置为低电平，P00~06置为高电平，即：</p>
@@ -371,12 +359,13 @@
 
 
 <h2 id="74HC595芯片工作原理"><a href="#74HC595芯片工作原理" class="headerlink" title="74HC595芯片工作原理"></a>74HC595芯片工作原理</h2><p>74HC595是一种将 <strong>串行</strong> 输入数据转为 <strong>并行输出</strong> 的移位寄存器。</p>
-<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png" alt="image-20200409152912502"></p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png" alt="74HC595_0"></p>
 <h6><center>74HC595引脚图</center></h6>
 
 
 
-<p><img src="C:%5CUsers&&%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200409153256590.png" alt="image-20200409153256590"></p>
+
+
 <h6><center>引脚功能图</center></h6>
 
 <blockquote>
@@ -459,7 +448,8 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C51/" rel="tag"># C51</a>
+            
+            <a href="/tags/C51/" rel="tag"><i class="fa fa-tag"></i>  C51</a>
           
         </div>
       
@@ -555,7 +545,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives/%7C%7C%20archive">
               
                   <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
