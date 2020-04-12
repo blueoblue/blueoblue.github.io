@@ -45,6 +45,32 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -86,15 +112,14 @@
 <meta property="og:site_name" content="Blueo&#39;s blog">
 <meta property="og:description" content="Led点阵工作原理led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。 点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I&#x2F;O资源。也降低">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://githubusercontent.com/blueoblue/Pics/master/imgs/C51/2020/20200411220330led_matrix.jpg">
 <meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png">
 <meta property="og:image" content="c:%5CUsers&&%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200410165654213.png">
 <meta property="article:published_time" content="2020-04-10T10:12:44.000Z">
-<meta property="article:modified_time" content="2020-04-11T14:11:02.835Z">
+<meta property="article:modified_time" content="2020-04-11T14:41:29.292Z">
 <meta property="article:author" content="blue">
 <meta property="article:tag" content="C51">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://githubusercontent.com/blueoblue/Pics/master/imgs/C51/2020/20200411220330led_matrix.jpg">
+<meta name="twitter:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png">
 
 
 
@@ -104,7 +129,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -151,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,7 +289,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="blue">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/defaults/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -350,7 +375,6 @@
       
         <h2 id="Led点阵工作原理"><a href="#Led点阵工作原理" class="headerlink" title="Led点阵工作原理"></a>Led点阵工作原理</h2><p>led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。</p>
 <p>点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I/O资源。也降低了整列的控制难度。同8个单独LED一样，点阵也分为共阴极、共阳极。通常所说的点阵共阴极（阳极）是指 <strong>按行</strong> 来看二极管的排布方上传图片失败。如下是一个共阳极的点阵。</p>
-<p><img src="https://githubusercontent.com/blueoblue/Pics/master/imgs/C51/2020/20200411220330led_matrix.jpg" alt="led_matrix"></p>
 <h6><center>8x8led共阳极点阵</center></h6>
 
 <p>其中，下侧的控制端 P7为高位，P0为低位；右侧DPh为高位，DPa为低位。要让<strong>左下RE57</strong>点亮，需要将 <strong>右侧DPa口置为高电平，DPh~DPb为低电平</strong>，下侧P07置为低电平，P00~06置为高电平，即：</p>
@@ -420,6 +444,14 @@
     
     
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/path/to/your/wechatqcode ex. /uploads/wechat-qcode.jpg" alt="blue wechat" style="width: 200px; max-width: 100%;"/>
+    <div>ex. subscribe to my blog by scanning my public wechat account</div>
+</div>
+
+      </div>
     
 
     
@@ -504,118 +536,6 @@
 
 
         </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">blue</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Led点阵工作原理"><span class="nav-number">1.</span> <span class="nav-text">Led点阵工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">8x8led共阳极点阵</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#74HC595芯片工作原理"><span class="nav-number">2.</span> <span class="nav-text">74HC595芯片工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#"><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">74HC595引脚图</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#"><span class="nav-number">2.0.0.0.2.</span> <span class="nav-text">引脚功能图</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">74HC595控制图</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插曲"><span class="nav-number">4.</span> <span class="nav-text">插曲</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
         
       </div>
     </main>
@@ -813,6 +733,9 @@
   
 
   
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
 
   
 
