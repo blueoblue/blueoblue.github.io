@@ -106,14 +106,16 @@
 <meta property="og:site_name" content="Blueo&#39;s blog">
 <meta property="og:description" content="Led点阵工作原理led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。 点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I&#x2F;O资源。也降低">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png">
-<meta property="og:image" content="c:%5CUsers&&%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200410165654213.png">
+<meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cled_matrix.jpg">
+<meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5C74HC595_0.png">
+<meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cimage-20200409153256590.png">
+<meta property="og:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5C74HC595line.png">
 <meta property="article:published_time" content="2020-04-10T10:12:44.000Z">
-<meta property="article:modified_time" content="2020-04-11T14:41:29.292Z">
+<meta property="article:modified_time" content="2020-04-22T05:35:09.197Z">
 <meta property="article:author" content="blue">
 <meta property="article:tag" content="C51">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png">
+<meta name="twitter:image" content="d:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cled_matrix.jpg">
 
 
 
@@ -380,6 +382,7 @@
       
         <h2 id="Led点阵工作原理"><a href="#Led点阵工作原理" class="headerlink" title="Led点阵工作原理"></a>Led点阵工作原理</h2><p>led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。</p>
 <p>点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I/O资源。也降低了整列的控制难度。同8个单独LED一样，点阵也分为共阴极、共阳极。通常所说的点阵共阴极（阳极）是指 <strong>按行</strong> 来看二极管的排布方上传图片失败。如下是一个共阳极的点阵。</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cled_matrix.jpg" alt="led_matrix"></p>
 <h6><center>8x8led共阳极点阵</center></h6>
 
 <p>其中，下侧的控制端 P7为高位，P0为低位；右侧DPh为高位，DPa为低位。要让<strong>左下RE57</strong>点亮，需要将 <strong>右侧DPa口置为高电平，DPh~DPb为低电平</strong>，下侧P07置为低电平，P00~06置为高电平，即：</p>
@@ -388,13 +391,12 @@
 
 
 <h2 id="74HC595芯片工作原理"><a href="#74HC595芯片工作原理" class="headerlink" title="74HC595芯片工作原理"></a>74HC595芯片工作原理</h2><p>74HC595是一种将 <strong>串行</strong> 输入数据转为 <strong>并行输出</strong> 的移位寄存器。</p>
-<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5CNote%5CC51%5Cimgs%5C74HC595_0.png" alt="74HC595_0"></p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5C74HC595_0.png" alt="74HC595_0"></p>
 <h6><center>74HC595引脚图</center></h6>
 
 
 
-
-
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cimage-20200409153256590.png" alt="image-20200409153256590"></p>
 <h6><center>引脚功能图</center></h6>
 
 <blockquote>
@@ -408,7 +410,7 @@
 <p>待数据输入完毕后，要得到并行输出，就需要将输出使能口 <strong>OE(13)</strong> 置为低电平。与输入控制端相同，<strong>RCK(12)</strong> 要产生一个上升沿信号，即先给一个低电平，再给一个高电平。使得74HC595中移位寄存器中的数据移动至数据寄存器。</p>
 <p>其中移位寄存器清零端 <strong>SCLK(10)</strong> 是在要将74HC595片内移位寄存器中的数据清除时才要使用的。工作中指零即可。</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>通过74HC595与单片机P0~P7来控制点阵LED中某个点的亮灭。</p>
-<p><img src="C:%5CUsers&&%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200410165654213.png" alt="image-20200410165654213"></p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5C74HC595line.png" alt="74HC595line"></p>
 <h6><center>74HC595控制图</center></h6>
 
 <p>从图中能够看出，需要控制左侧P34~36这三个端口，还要用跳线帽将 <strong>J24</strong>上的OE与GND短接才能输出。</p>
@@ -602,7 +604,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
