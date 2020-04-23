@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        Blue
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="/css/style/github.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div class="container">
+        <div class="header">
+    
+    <!-- <div class="logo">
+        <a href="/">Blue</a>
+    </div> -->
+    <div class="logo">
+        <img src="/images/logo.png" alt="Logo">
+    </div>
+    <div class="nav">
+        <ul class="menu">
+            
+                <li class="menu-item">
+                    <a href="/" class="menu-item-link">
+                        主页
+                    </a>
+                </li>
+            
+                <li class="menu-item">
+                    <a href="/tags" class="menu-item-link">
+                        标签
+                    </a>
+                </li>
+            
+                <li class="menu-item">
+                    <a href="https://github.com/blueoblue" target="_blank" rel="noopener" class="menu-item-link">
+                        项目
+                    </a>
+                </li>
+                
+        </ul>
+    </div>
+</div>
+        <div class="article">
+    
+
+    <div class="article-content">
+        <h2 id="Led点阵工作原理"><a href="#Led点阵工作原理" class="headerlink" title="Led点阵工作原理"></a>Led点阵工作原理</h2><p>led点阵由led（发光二极管）按照一定的排列组成。通过控制单个led的亮灭来显示样式，如图片、文字、视频等。点阵又有单色与彩色之分。每一点只有一种颜色led就是单色点阵屏；每一点上由三色（RGB）组成的就是彩色点阵。</p>
+<p>点阵内部如下，每行8个LED的阳极连接在一端；每列的8个LED的阴极连接在一端。而并没有单独将每个LED控制线独立出来，这样做实际是为了节省系统I/O资源。也降低了整列的控制难度。同8个单独LED一样，点阵也分为共阴极、共阳极。通常所说的点阵共阴极（阳极）是指 <strong>按行</strong> 来看二极管的排布方上传图片失败。如下是一个共阳极的点阵。</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cled_matrix.jpg" alt="led_matrix"></p>
+<h6><center>8x8led共阳极点阵</center></h6>
+
+<p>其中，下侧的控制端 P7为高位，P0为低位；右侧DPh为高位，DPa为低位。要让<strong>左下RE57</strong>点亮，需要将 <strong>右侧DPa口置为高电平，DPh~DPb为低电平</strong>，下侧P07置为低电平，P00~06置为高电平，即：</p>
+<pre><code class="c">P0=0x7F; // 0b 0111 1111
+DP=0x01; // 0b 0000 0001</code></pre>
+<h2 id="74HC595芯片工作原理"><a href="#74HC595芯片工作原理" class="headerlink" title="74HC595芯片工作原理"></a>74HC595芯片工作原理</h2><p>74HC595是一种将 <strong>串行</strong> 输入数据转为 <strong>并行输出</strong> 的移位寄存器。</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5C74HC595_0.png" alt="74HC595_0"></p>
+<h6><center>74HC595引脚图</center></h6>
+
+
+
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cimage-20200409153256590.png" alt="image-20200409153256590"></p>
+<h6><center>引脚功能图</center></h6>
+
+<blockquote>
+<p>不同厂家生产的芯片管脚名称略有不同，但各功能对应的管脚是一样的。</p>
+</blockquote>
+<ul>
+<li>输入：数据从SI(14)口输入，一个字节的数据有八位，但只有一个端口，要想过去，只能一个一个按顺序通过，这就是串行输入。</li>
+<li>输出：从输入得来的8位数据，按从高到低的顺序从QH~QA同时（并行）输出。</li>
+</ul>
+<p>发送数据前，要将控制端口<strong>SCK(11)</strong>置为低电平，然后按位发送到端口 <strong>SI(14)</strong>后 ，紧接着给 <strong>SCK(11)</strong>口一个高电平，这样就能产生一个上升沿的时钟信号，是数据能够写入。如此操作8次，数据就会写入芯片内部移位寄存器中。</p>
+<p>待数据输入完毕后，要得到并行输出，就需要将输出使能口 <strong>OE(13)</strong> 置为低电平。与输入控制端相同，<strong>RCK(12)</strong> 要产生一个上升沿信号，即先给一个低电平，再给一个高电平。使得74HC595中移位寄存器中的数据移动至数据寄存器。</p>
+<p>其中移位寄存器清零端 <strong>SCLK(10)</strong> 是在要将74HC595片内移位寄存器中的数据清除时才要使用的。工作中指零即可。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>通过74HC595与单片机P0~P7来控制点阵LED中某个点的亮灭。</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5C74HC595line.png" alt="74HC595line"></p>
+<h6><center>74HC595控制图</center></h6>
+
+<p>从图中能够看出，需要控制左侧P34~36这三个端口，还要用跳线帽将 <strong>J24</strong>上的OE与GND短接才能输出。</p>
+<pre><code class="c">#include&lt;reg52.h&gt;
+typedef unsigned char uchar;
+
+// led阳极数据控制端
+sbit IDATA=P3^4;
+sbit OCLK=P3^5;
+sbit ICLK=P3^6;
+
+// 印记控制端
+sbit led0=P0^7;
+
+void send(uchar data){
+    uchar i=0;
+
+    // 分8次发送数据
+    for(;i&lt;8;i++){
+        // 从最高位开始发送，假设为0x01： 0b0000 0001
+        // --左移7位后，第7位0移至第0位，并送入数据输入口
+        IDATA=data &gt;&gt; 7;
+        // 再将数据向左移1位，使原来第6位成为最高位
+        data=data &lt;&lt; 1;
+
+        // 发送完一位产生一个上升沿信号
+        ICLK=0;
+        ICLK=1;
+    }
+    // 输入完毕后，在该输出控制端口一个上升沿信号，是数据到达输出口。
+    OCLK=0;
+    OCLK=1;
+}
+
+int main(){
+    // 给左下角小灯RE57阴极一个低电平
+    led7=0;
+    // 给RE57阳极一个高电平
+    send(0x01);
+    while(1);
+
+    return 0;
+}</code></pre>
+<p>若需要控制更大面积的点阵，只需将多块74HC595芯片级联起来，用前一片的 【串行数据输出口 <strong>SQH(9)</strong>】 作为下一片的【串行数据输入口 <strong>SER(14)</strong>】的输入，就能达到控制更多点阵的功能。</p>
+<h2 id="插曲"><a href="#插曲" class="headerlink" title="插曲"></a>插曲</h2><ol>
+<li><p>程序编译时，无辜出错。重装keil C51 V9.59，未记录错误信息，无截图。</p>
+<pre><code class="c">...
+uchar i=0;
+for(;i&lt;8;i++){
+ ...
+}</code></pre>
+<p>即便声明了循环变量 <strong>i</strong>，但编译仍会报错：“未声该明变量”。</p>
+<p>原因在于C语言中，常量为<code>unsigned</code>型，但一个非负整数可以赋值给<code>unsigned</code>型变量，只要没有超出被赋值对象数据范围。即一个非负 <code>signed</code>型常量可以赋值给<code>unsigned</code>型。</p>
+<p>代码中 <em>i</em> 为 <em>unsigned cha</em> 型，<em>8</em>为<code>signed</code>型。而在keil c51 v9.59之前的版本中会发生这样的错误。此版之后该问题被修正。</p>
+<p>若使用这之前的版本，为防止出错，就需要在执行此类操作时将被操作数强制转换为相同数据类型，即：</p>
+<pre><code class="c">void send(uchar data){
+ uchar i=0;
+    ...
+ for(;i&lt;(uchar)8;i++){
+     ...
+ }
+}</code></pre>
+</li>
+<li><p>还有这样的错误：</p>
+<p>code：</p>
+<pre><code class="c">void send(uchar data){
+    ...
+ uchar i=0;
+ for(;i&lt;(uchar)8;i++){
+     ...
+ }
+}</code></pre>
+<p>error：</p>
+<pre><code>...: error C141: syntax error near &#39;uchar&#39;, expected &#39;__asm&#39;
+...: error C202: &#39;a&#39;: undefined identifier
+...: error C202: &#39;a&#39;: undefined identifier</code></pre><p>C语言规定不能在 <strong>中途定义变量</strong> 。而错误中的 <strong>_asm</strong>是汇编语句。keil错误的理解了这句话，导致编译错误。</p>
+</li>
+</ol>
+<p>错误参考：</p>
+<ol>
+<li><a href="https://www.amobbs.com/thread-5717401-1-1.html" target="_blank" rel="noopener">错误一</a></li>
+<li><a href="https://blog.csdn.net/luoye2333/article/details/87875874" target="_blank" rel="noopener">错误二</a></li>
+</ol>
+
+    </div>
+    <div class="article-tags">
+        <h2>
+            [object Object]
+        </h2>
+    </div>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fas fa-edit"></i>
+            2020/04/10 周五 18:12&nbsp;&nbsp;&nbsp;
+            <span class="just-a-temp"><span>
+            <i class="fas fa-redo"></i>
+            2020/04/22 周三 13:35
+        </div>
+    </div>
+    <div class="totop">ToTOP</div>
+</div>
+        <div class="footer">
+    <a href="#">
+        2020 
+        
+        blue 
+        <i class="fas fa-angle-double-up">
+        ToTop
+        </i>
+    </a>
+</div>
+
+
+<script src="/js/totop.js"></script>
+
+
+<script src="/js/search.js"></script>
+
+    </div>
+</body>
+
+</html>

@@ -56,23 +56,47 @@
     
 
     <div class="article-content">
-        <p>[<a href="./C51">C51</a>]</p>
-<p>[<a href="./hexo">hexo</a>]</p>
-<p>[<a href="./win">win</a>]</p>
+        <p>为防止文件意外丢失，可以在系统中添加定时任务，对文件进行备份。</p>
+<h2 id="编写任务脚本"><a href="#编写任务脚本" class="headerlink" title="编写任务脚本"></a>编写任务脚本</h2><p>在文本编辑器中键入如下代码：autoBackuo.bat</p>
+<pre><code>@echo off
+xcopy source destination /e/i/d/h/r/y
+exit</code></pre><p>/e：复制该目录及其子目录（包括空目录）</p>
+<p>/i：如果目标不存在，且要复制多个文件，则假定目标必须是目录。       </p>
+<p>/d：复制在指定日期或指定日期以后更改的文件。如果没有提供日期，只复制那些源时间比目标时间新的文件。    </p>
+<p>/h：也复制隐藏文件和系统文件。</p>
+<p>/r：覆盖只读文件。</p>
+<p>/y：取消提示以确认要覆盖  现有目标文件。       </p>
+<p>​      </p>
+<h2 id="添加任务"><a href="#添加任务" class="headerlink" title="添加任务"></a>添加任务</h2><p><strong>win+x</strong>，启动 <strong>计算机管理</strong>。</p>
+<p>系统工具–&gt;任务计划程序–&gt;任务计划程序库–&gt;右侧“创建任务”</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cwin%5Cbackup.png" alt="image-20200405145928364"></p>
+<ol>
+<li><p>添加任务名称<br><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cwin%5Cbackup0.png" alt="backup0"></p>
+</li>
+<li><p>新建触发器</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cwin%5Cbackup1.png" alt="backup1"></p>
+<p>自定义时间间隔。</p>
+</li>
+<li><p>新建操作</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cwin%5Cbackup2.png" alt="backup2"></p>
+<p>选择刚才编写的可执行文件。</p>
+</li>
+</ol>
+<p>完成后，点击管理器右侧 <strong>运行</strong>，即可执行该任务。</p>
 
     </div>
     <div class="article-tags">
         <h2>
-            
+            [object Object]
         </h2>
     </div>
     <div class="article-meta">
         <div class="article-date">
             <i class="fas fa-edit"></i>
-            2020/04/01 周三 21:22&nbsp;&nbsp;&nbsp;
+            2020/04/05 周日 14:22&nbsp;&nbsp;&nbsp;
             <span class="just-a-temp"><span>
             <i class="fas fa-redo"></i>
-            2020/04/23 周四 14:41
+            2020/04/05 周日 15:17
         </div>
     </div>
     <div class="totop">ToTOP</div>

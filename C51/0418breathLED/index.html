@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        Blue
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="/css/style/github.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div class="container">
+        <div class="header">
+    
+    <!-- <div class="logo">
+        <a href="/">Blue</a>
+    </div> -->
+    <div class="logo">
+        <img src="/images/logo.png" alt="Logo">
+    </div>
+    <div class="nav">
+        <ul class="menu">
+            
+                <li class="menu-item">
+                    <a href="/" class="menu-item-link">
+                        主页
+                    </a>
+                </li>
+            
+                <li class="menu-item">
+                    <a href="/tags" class="menu-item-link">
+                        标签
+                    </a>
+                </li>
+            
+                <li class="menu-item">
+                    <a href="https://github.com/blueoblue" target="_blank" rel="noopener" class="menu-item-link">
+                        项目
+                    </a>
+                </li>
+                
+        </ul>
+    </div>
+</div>
+        <div class="article">
+    
+
+    <div class="article-content">
+        <p>每当有新消息时，手机上的呼吸灯就会亮起来。那么这是怎么实现的呢？</p>
+<p>首先，需要了解一下什么是PWM。<a href="[https://baike.baidu.com/item/%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6/10813756?fromtitle=PWM&fromid=3034961&fr=aladdin](https://baike.baidu.com/item/脉冲宽度调制/10813756?fromtitle=PWM&fromid=3034961&fr=aladdin)">PWM</a>，即脉冲宽度调制技术。简单来说就是在单个周期内对脉冲信号的宽度进行调节，来控制输出的效果。</p>
+<p><img src="D:%5CAPPJIDI%5CGit%5Cgitter%5Cblogs%5Cauo%5Csource%5Cuploads%5C20%5Cc51%5Cpwm.png" alt="pwm"></p>
+<center>pwm调节</center>
+
+<p>如图，单个周期（Period）内，通过控制高低电平脉冲占有的宽度，使得输出的脉冲信号的强弱发生变化。例如，每个周期时长为Period=10ms：</p>
+<p>$T_{on}$=0ms，脉冲强度为0；</p>
+<p>$T_{on}$=$\frac{1}{4}Period$=2.5ms，脉冲强度增加到最大的25%；</p>
+<p>$T_{on}$=Period​=10ms，脉冲强度达到最大；</p>
+<p>也就是说，单个周期内高电平所占时间越长，这段时间内的能量也就越大，输出效果也就越强。所以，依据这样的原理，只要持续改变$T_{on}$就能时亮度逐渐变化达到呼吸灯的效果。</p>
+<p>下面来具体实现呼吸灯效果：</p>
+<pre><code class="c">#include&lt;reg52.h&gt;
+
+typedef unsigned char uchar;
+typedef unsigned int uint;
+
+sbit led=P2^0;
+// 亮/灭维持的时间
+uchar Time;
+// 单周期的时长
+const uchar allTime=100;
+// pwm变换功能
+void pwm(bit state);
+// 呼吸灯
+void breath_led(uchar time,uchar cycle);</code></pre>
+<p>首先实现定时功能：</p>
+<pre><code class="c">void pwm(bit state){
+    /*
+     Description：该段时间内，led亮/灭时常
+     state：led的状态（亮/灭）
+     */
+    uint count;
+    // Time/10：参数Time为10倍的ms，0.5ms以浮点数不够精确
+    count=65535-(Time/10)*((11059200/12)/1000);
+    led=state;
+
+    TMOD=(TMOD &amp; 0xFC) | 0x01;
+    // 将计数初始值高八位给定时器高八位
+    TH0=(uchar)(count &gt;&gt; 8);
+    TL0=(uchar)count;
+
+    // 同时启动定时器T0中断功能
+    ET0=1;
+    TR0=1;
+
+    // 定时时阻塞，直至定时结束
+    while(!TF0);
+}</code></pre>
+<p>该定时功能只实现但周期内高（或低）点电平内的定时。即首先是高电平维持一段时间，定时结束后，<code>TF0=1</code> 触发中断。再从中断中来控制低电平维持的时长。中断功能如下：</p>
+<pre><code class="c">void interruptT0() interrupt 1{
+    // led上个状态为亮（0），启用高电平（1）时led熄灭
+    if(!led){
+        Time=allTime-Time;
+        pwm(1);
+    // 一个周期执行完毕
+    }else{
+        TR0=0;
+    }
+}</code></pre>
+<p>然后是具体的控制：</p>
+<pre><code class="c">void breath_led(uchar time){
+    while(j!=cycle){
+        Time=time;
+        pwm(0);
+    }
+}</code></pre>
+<p>主函数：</p>
+<pre><code class="c">int main()
+{
+    EA=1;
+    // 2.5ms，但以uchar型给定，计算时转换为float型
+    breath_led(5);
+    return 0;
+}</code></pre>
+<p>需要开启使能总中断：</p>
+<p>通过调节高电平时间从5到25、75，可以发现，led小灯亮度越来越大，符合预期。所以，只要增加足够多的亮度等级，就能达到亮度渐变效果呼吸效果。实现如下：</p>
+<pre><code class="c">void breath_led(uchar cycle){
+    /*
+     description：呼吸灯效果
+     cycle：每个阶段持续的周期数；越大变化越慢，反之越快
+     */
+    // 第几个亮度等级
+    uchar j;
+    // 该亮度下第几周期
+    uchar i;
+    // 每隔0.5ms一个亮度等级
+    uchar add=5;
+
+    while(1){
+        if(i==0){
+            add=5;
+        }else if(i==allTime){
+            add=-5;
+        }
+        // Time=i; 
+        // 如下，每个亮度阶段持续周期
+        for(j=0;j&lt;cycle;j++){
+            Time=i;
+            pwm(0);
+        }
+        i=i+add;
+    }
+}</code></pre>
+<p>完整代码参见：<a href="https://github.com/blueoblue/c51/blob/master/led/led_bre1.c" target="_blank" rel="noopener">breath_led</a> 。</p>
+
+    </div>
+    <div class="article-tags">
+        <h2>
+            [object Object]
+        </h2>
+    </div>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fas fa-edit"></i>
+            2020/04/18 周六 21:59&nbsp;&nbsp;&nbsp;
+            <span class="just-a-temp"><span>
+            <i class="fas fa-redo"></i>
+            2020/04/23 周四 11:36
+        </div>
+    </div>
+    <div class="totop">ToTOP</div>
+</div>
+        <div class="footer">
+    <a href="#">
+        2020 
+        
+        blue 
+        <i class="fas fa-angle-double-up">
+        ToTop
+        </i>
+    </a>
+</div>
+
+
+<script src="/js/totop.js"></script>
+
+
+<script src="/js/search.js"></script>
+
+    </div>
+</body>
+
+</html>

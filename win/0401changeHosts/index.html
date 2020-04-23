@@ -52,20 +52,64 @@
         </ul>
     </div>
 </div>
-        <div class="archive">
-    <ul class="post-archive">
-        
-        <li class="post-item">
-            <span class="post-date">
-                20/04/02</span>
-            <a href="//hexo/0402pageConfig/" target="_blank" rel="noopener" class="post-title">
-                hexo页面样式配置
-            </a>
-        </li>
-        
-    </ul>
-</div>
+        <div class="article">
+    
 
+    <div class="article-content">
+        <h6>
+    加速github访问
+</h6>
+
+
+<ol>
+<li><p>打开Powershell,切换至C:\windows\system32\drivers\etc</p>
+<pre><code class="powershell">Windows PowerShell
+
+PS C:\WINDOWS\system32&gt; cd C:\Windows\System32\drivers\etc</code></pre>
+</li>
+<li><p>执行以下命令，即可以管理员权限用记事本打开hosts文件：</p>
+<pre><code class="powershell">PS C:\Windows\System32\drivers\etc&gt; notepad hosts
+
+C:\Windows\System32\drivers\etc&gt; cmd</code></pre>
+</li>
+<li><p>添加ip地址：</p>
+<pre><code>13.250.177.223 github.com
+192.30.252.131 github.com
+192.30.253.113 github.com
+
+74.125.237.1    dl-ssl.google.com
+74.125.128.95   ajax.googleapis.com
+151.101.88.249  github.global.ssl.fastly.net
+173.194.127.200 groups.google.com
+185.31.16.185   github.global.ssl.fastly.net</code></pre></li>
+</ol>
+<ol start="4">
+<li><p>保存后，刷新：</p>
+<pre><code class="powershell">C:\Windows\System32\drivers\etc&gt; ipconfig /flushdns
+
+Windows IP 配置
+已成功刷新 DNS 解析缓存。</code></pre>
+</li>
+</ol>
+<p>重新打开github，访问速度明显提升！</p>
+
+    </div>
+    <div class="article-tags">
+        <h2>
+            [object Object]
+        </h2>
+    </div>
+    <div class="article-meta">
+        <div class="article-date">
+            <i class="fas fa-edit"></i>
+            2020/04/01 周三 22:44&nbsp;&nbsp;&nbsp;
+            <span class="just-a-temp"><span>
+            <i class="fas fa-redo"></i>
+            2020/04/02 周四 11:22
+        </div>
+    </div>
+    <div class="totop">ToTOP</div>
+</div>
         <div class="footer">
     <a href="#">
         2020 
